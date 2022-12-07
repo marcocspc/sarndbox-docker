@@ -1,0 +1,6 @@
+version: '3.7'
+services:
+  sarndbox:
+    build: .
+  env:
+    - "VRUI_VERSION=Vrui-8.0-002"
