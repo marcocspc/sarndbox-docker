@@ -2,5 +2,7 @@ version: '3.7'
 services:
   sarndbox:
     build: .
-  env:
-    - "VRUI_VERSION=Vrui-8.0-002"
+    environment:
+      - "VRUI_VERSION=Vrui-8.0-002"
+    volumes:
+      - "${PWD}/teste:/data"
