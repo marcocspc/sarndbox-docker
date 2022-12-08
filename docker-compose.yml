@@ -1,8 +1,21 @@
 version: '3.7'
 services:
   sarndbox:
-    build: .
+    build:
+      context: .
+      args:
+        - "DISPLAY=${DISPLAY}"
+    network_mode: "host"
     environment:
       - "VRUI_VERSION=Vrui-8.0-002"
+    runtime: nvidia
     volumes:
       - "${PWD}/teste:/data"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+      - "${HOME}/.Xauthority:/root/.Xauthority:Z"
+      - "/dev/dri:/dev/dri"
+        #    deploy:
+        #      resources:
+        #        reservations:
+        #          devices:
+        #            - capabilities: [gpu]
