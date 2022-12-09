@@ -11,6 +11,7 @@ services:
     privileged: true
     environment:
       - "VRUI_VERSION=Vrui-8.0-002"
+      - "DISPLAY=unix${DISPLAY}"
     runtime: nvidia
     volumes:
       - "/tmp/.X11-unix:/tmp/.X11-unix"

@@ -19,7 +19,7 @@ nvidia-dockerfile:
 	@echo created Dockerfile.nvidia in $(PWD)
 
 .PHONY:nvidia-version
-nvidia-version: export NVIDIA_VERSION="$(head -n1 </proc/driver/nvidia/version | awk '{ print $8 }')"
+nvidia-version: export NVIDIA_VERSION = $(head -n1 </proc/driver/nvidia/version | awk '{ print $8 }')
 
 .PHONY:nvidia
 nvidia: nvidia-version
