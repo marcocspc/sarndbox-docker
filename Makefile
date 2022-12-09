@@ -11,3 +11,8 @@ installudevrules:
 .PHONY:build
 build:
 	@docker-compose build
+
+.PHONY:nvidia-dockerfile
+nvidia-dockerfile:
+	@cat Dockerfile > Dockerfile.nvidia
+	@sed -i "s/FROM ubuntu:18.04/FROM nvcr.io\/nvidia\/driver:525.60.13-ubuntu18.04/g" Dockerfile.nvidia
