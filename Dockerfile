@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:18.04 AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DISPLAY
@@ -34,3 +34,23 @@ RUN cd /data/src/SARndbox-2.8 && make
 
 RUN ls /usr/local/bin
 RUN ls /data/src/SARndbox-2.8/bin
+
+FROM base as nvidia
+
+ARG DRIVER_URL
+
+#Got this from https://github.com/mviereck/x11docker/issues/127#issuecomment-464875030
+RUN apt-get install --no-install-recommends -y kmod \
+                                               xz-utils \
+                                               wget \
+                                               ca-certificates 
+
+RUN wget $DRIVER_URL -O /tmp/NVIDIA-installer.run 
+RUN sh /tmp/NVIDIA-installer.run \
+        --accept-license --no-runlevel-check --no-questions --no-backup --ui=none \
+        --no-kernel-module --no-kernel-module-source --no-nouveau-check --no-nvidia-modprobe && \
+    rm /tmp/NVIDIA-installer.run 
+
+RUN apt-get remove -y kmod xz-utils wget ca-certificates 
+
+RUN apt-get autoremove -y

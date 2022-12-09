@@ -3,9 +3,10 @@ services:
   sarndbox-nvidia:
     build:
       context: .
-      dockerfile: Dockerfile.nvidia
       args:
-        - "DISPLAY=${DISPLAY}"
+        - "DISPLAY=unix${DISPLAY}"
+        - "DRIVER_URL=https://http.download.nvidia.com/XFree86/Linux-x86_64/${NVIDIA_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_VERSION}.run"
+      target: "nvidia"
     network_mode: "host"
     privileged: true
     environment:
@@ -15,12 +16,13 @@ services:
       - "/tmp/.X11-unix:/tmp/.X11-unix"
       - "/dev/dri:/dev/dri"
       - "${PWD}/Kinect:/usr/local/etc/Vrui-8.0/Kinect-3.10/"
+      - "${PWD}/config:/root/config"
   sarndbox:
     build:
       context: .
-      dockerfile: Dockerfile
       args:
         - "DISPLAY=unix${DISPLAY}"
+      target: "base"
     network_mode: "host"
     privileged: true
     environment:
@@ -30,3 +32,4 @@ services:
       - "/tmp/.X11-unix:/tmp/.X11-unix"
       - "/dev/dri:/dev/dri"
       - "${PWD}/Kinect:/usr/local/etc/Vrui-8.0/Kinect-3.10/"
+      - "${PWD}/config:/root/config"
