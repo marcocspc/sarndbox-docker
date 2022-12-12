@@ -17,7 +17,8 @@ services:
       - "/tmp/.X11-unix:/tmp/.X11-unix"
       - "/dev/dri:/dev/dri"
       - "${PWD}/Kinect:/usr/local/etc/Vrui-8.0/Kinect-3.10/"
-      - "${PWD}/config:/root/config"
+      - "${PWD}/config:/root/.config"
+      - "${PWD}/SARndbox-2.8/BoxLayout.txt:/data/src/SARndbox-2.8/etc/SARndbox-2.8/BoxLayout.txt"
   sarndbox:
     build:
       context: .
@@ -33,4 +34,5 @@ services:
       - "/tmp/.X11-unix:/tmp/.X11-unix"
       - "/dev/dri:/dev/dri"
       - "${PWD}/Kinect:/usr/local/etc/Vrui-8.0/Kinect-3.10/"
-      - "${PWD}/config:/root/config"
+      - "${PWD}/config:/root/.config"
+      - "${PWD}/SARndbox-2.8/BoxLayout.txt:/data/src/SARndbox-2.8/etc/SARndbox-2.8/BoxLayout.txt"
