@@ -1,6 +1,6 @@
 UDEVRULEDIR := /etc/udev/rules.d
 
-all: installudevrules build
+all: build
 
 .PHONY:installudevrules
 installudevrules:
